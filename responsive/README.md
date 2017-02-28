@@ -1,4 +1,5 @@
 Comp20 Lab: Responsive Design
+
 February 13, 2017
 
 1. All aspects of the responsive design lab have been correctly implemented.

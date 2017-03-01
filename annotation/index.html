@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Fail</title>
+	<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+<h1 id="title">Fail</h1>
+
+<video src="https://www.cs.tufts.edu/comp/20/fail.mp4" id="failvideo" controls></video>
+<div id="lyrics"></div>
+
+<script>
+	var video = document.getElementById("failvideo");
+	video.ontimeupdate = function() {
+		updateLyrics();
+	};
+
+	function updateLyrics() {
+		var time = video.currentTime;
+		var verse = "";
+
+		if (time > 9 && time <= 13 ) {
+			verse = "You've got me feelin' emotions";
+		} else if (time > 13 && time <= 17) {
+			verse = "Deeper than I've ever dreamed of";
+		} else if (time > 17 && time <= 21) {
+			verse = "You've got me feelin' emotions";
+		} else if (time > 21 && time <= 25) {
+			verse = "Higher than the heavens above";
+		} else if (time > 25 && time <= 30) {
+			verse = "I feel good, I feel nice";
+		} else if (time > 30 && time <= 34) {
+			verse = "I've never felt so satisfied";
+		} else if (time > 34 && time <= 38) {
+			verse = "I'm in love, I'm alive";
+		} else if (time > 38 && time <= 44) {
+			verse = "Intoxicated, flyin' high";
+		} else if (time > 44 && time <= 46) {
+			verse = "Feels like a dream";
+		} else if (time > 46 && time <= 51) {
+			verse = "When you touch me tenderly";
+		} else if (time > 51 && time <= 55) {
+			verse = "I don't know if it's real";
+		} else if (time > 55 && time <= 59) {
+			verse = "But I like the way I feel inside";
+		} else if (time > 59 && time <= 63) {
+			verse = "You've got me feelin' emotions";
+		} else if (time > 63 && time <= 67) {
+			verse = "Deeper than I've ever dreamed of";
+		} else if (time > 67 && time <= 71) {
+			verse = "You've got me feelin' emotions";
+		} else if (time > 71 && time <= 76) {
+			verse = "Higher than the heavens above";
+		} 
+
+		document.getElementById("lyrics").innerHTML = verse;
+	}
+</script>
+</body>
+</html>

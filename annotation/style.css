@@ -1,0 +1,16 @@
+#failvideo {
+	margin: 0 auto;
+	display: block;
+	border: 10px dashed grey;
+	padding: 30px;
+}
+
+#lyrics {
+	margin: 0 auto;
+	border: 10px solid grey;
+	padding: 10px;
+}
+
+h1 {
+	text-align: center;
+}

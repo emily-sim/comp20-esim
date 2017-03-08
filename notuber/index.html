@@ -1,0 +1,42 @@
+<!DOCTYPEhtml>
+<html>
+	<head>
+		<title>BlackCar</title>
+		<meta name="viewport" content="initial-scale=1.0">
+		<meta charset="utf-8" /> 
+		<link rel="stylesheet" href="style.css" type="text/css" />	
+	</head>
+
+	<body>
+		<div id="map"></div>	
+
+		<script>
+    	function getLocation() {
+    		if(navigator.geolocation) {
+    			navigator.geolocation.getCurrentPosition(initMap);
+    		} 
+    	}
+    </script>
+
+		 <script>
+      function initMap(position) {
+
+      	var currPos = {lat: position.coords.latitude, lng: position.coords.longitude};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: currPos,
+          zoom: 8
+        });
+        var marker = new google.maps.Marker({
+        	position: currPos,
+        	map: map
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5webgF56eiy7lpMXFp1OGrf_22MPofqc&callback=initMap"
+    async defer></script>
+
+    <!--difference b/ween window.document.onload and window.onload when using API's-->
+    <script>window.onload = getLocation()</script>
+	</body>
+</html>
+

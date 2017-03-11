@@ -10,33 +10,72 @@
 	<body>
 		<div id="map"></div>	
 
-		<script>
-    	function getLocation() {
-    		if(navigator.geolocation) {
-    			navigator.geolocation.getCurrentPosition(initMap);
+	<!--	<script>
+			var currLat = 0;
+			var currLng = 0;
+			var request = new XMLHttpRequest();
+
+			var currPos = new google.maps.LatLng(currLat, currLng);
+			var map;
+			var marker;
+
+			function initMap() {
+					map = new google.maps.Map(document.getElementById('map'), {
+          	center: currPos,
+         		zoom: 10
+          });
+          getLocation();
+			}
+
+			function getLocation() {
+				if(navigator.geolocation) {
+    			navigator.geolocation.getCurrentPosition(function(position) {
+    				currLat = position.coords.latitude;
+    				currLng = position.coords.longitude;
+    				displayMap();
+    			});
     		} 
-    	}
-    </script>
+    		else {
+    			alert("Geolocation is not available");
+    		}
+			}
 
-		 <script>
-      function initMap(position) {
+			function displayMap() {
+				currPos = new google.maps.LatLng(currLat, currLng);
+				map.panTo(currPos);
+				marker = new google.maps.Marker({
+        	position: currPos,
+        });
+        marker.setMap(map);
+			}
 
-      	var currPos = {lat: position.coords.latitude, lng: position.coords.longitude};
+    </script>-->
+
+
+
+    <script>
+
+    var currLat = 0;
+    var currLng = 0;
+    var currLoc = new google.maps.LatLng(currLat, currLng);
+    console.log(currLoc);
+
+      function initMap() {
+        var uluru = {lat: -25.363, lng: 131.044};
         var map = new google.maps.Map(document.getElementById('map'), {
-          center: currPos,
-          zoom: 8
+          zoom: 4,
+          center: uluru
         });
         var marker = new google.maps.Marker({
-        	position: currPos,
-        	map: map
+          position: uluru,
+          map: map
         });
       }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5webgF56eiy7lpMXFp1OGrf_22MPofqc&callback=initMap"
-    async defer></script>
 
-    <!--difference b/ween window.document.onload and window.onload when using API's-->
-    <script>window.onload = getLocation()</script>
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWR0nwDDmPtUlqyFEs3ZBK4oG-qI3QebI&callback=initMap"
+    async defer></script>
+    
 	</body>
 </html>
 

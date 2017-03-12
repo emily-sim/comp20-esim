@@ -63,7 +63,7 @@ function checkData(data) {
 }
 
 function displayData(data, isPassengers) {
-	var dataMarker, infoWindow, x;
+	var dataMarker, i;
 
 	if (isPassengers) {
 		dataMarker = 'user.png';
@@ -71,43 +71,47 @@ function displayData(data, isPassengers) {
 		dataMarker = 'black_car.png';
 	}
 
-	infoWindow = new google.maps.InfoWindow();
+	var infoWindow = new google.maps.InfoWindow();
 
-	for (x in data) {
+	for (i = 0; i < data.length; i++) {
 		marker = new google.maps.Marker({
-			position: new google.maps.LatLng(data[x].lat, data[x].lng),
+			position: new google.maps.LatLng(data[i].lat, data[i].lng),
 			icon: dataMarker,
 			size: new google.maps.Size(1, 1),
 			map: map
 		});
-	}
 
-	google.maps.event.addListener(marker, 'click', (function(marker, x){
-		return function() {
-			username = data[x].username;
-			myPos = new google.maps.LatLng(myLat, myLng);
-			userPos = new google.maps.LatLng(data[x].lat, data[x].lng);
-			distance = new google.maps.computeDistanceBetween(myPos, userPos);
-			displayInfo = "<div><p>Username: "+ username + "</p><p>Miles from me: " + distance + "</p></div>";
-	    info.setContent(displayInfo);
-	    info.open(map, marker);
-		}
-	})(marker, x));
+		google.maps.event.addListener(marker, 'click', (function(marker, i){
+			return function() {
+				var username = data[i].username;
+				var userLat = data[i].lat;
+				var userLng = data[i].lng;
+				var distance = getDistance(userLat, userLng)
+				var displayInfo = "<div><p>Username: "+ username + "</p><p>Miles from me: " + distance + "</p></div>";
+	   	 infoWindow.setContent(displayInfo);
+	   	 infoWindow.open(map, marker);
+			}
+		})(marker, i));
+	}
 }
 
+function getDistance(userLat, userLng) {
+	Number.prototype.toRad = function() {
+	  return this * Math.PI / 180;
+ 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	lat1 = userLat;
+	lng1 = userLng;
+	lat2 = myLat;
+	lng2 = myLng;
+	R = 6371;
+	x1 = lat2-lat1;
+	dLat = x1.toRad();
+	x2 = lng2-lng1;
+	dLng = x2.toRad();
+	a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) * Math.sin (dLng/2) * Math.sin(dLng/2);
+	c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+	distance = R * c;
+	distance = distance * 0.062137;
+	return distance;
+}

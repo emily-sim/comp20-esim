@@ -7,3 +7,4 @@ Did I collaborate with anyone?
 No
 
 How many hours were spent on this assignment? 
+1 hour
